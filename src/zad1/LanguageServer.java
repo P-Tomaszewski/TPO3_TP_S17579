@@ -9,7 +9,7 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServerFr {
+public class LanguageServer {
     private Socket socket = null;
     private Socket socketSend = null;
     private ServerSocket socketServer = null;
@@ -18,21 +18,11 @@ public class ServerFr {
     private DataOutputStream outputServer = null;
 
     public static void main(String[] arg){
-        int frServerPort = 6663;
-        ServerFr serverFr = new ServerFr();
-        serverFr.server(frServerPort);
+
     }
 
-    public static Map<String, String> mapDictionary = new HashMap<String, String>(){
-        {
-            put("Koza", "chèvre");
-            put("Ogien", "feu");
-            put("Rower", "vélo");
-            put("Noc", "nuit");
-        }
-    };
 
-    public void server(int port) {
+    public void server(int port,  Map<String, String> mapDictionary) {
 
         try {
             socketServer = new ServerSocket(port);
@@ -56,7 +46,7 @@ public class ServerFr {
                 try {
                     outputServer.writeUTF(mapDictionary.get(splitLine[0]));
                 }catch (NullPointerException a){
-                    outputServer.writeUTF("Nie znaleziono w slowniku Francuskim");
+                    outputServer.writeUTF("Nie znaleziono w slowniku Angielskim");
                 }
 
             }

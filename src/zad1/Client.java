@@ -1,6 +1,5 @@
 package zad1;
 
-import javax.swing.*;
 import java.net.*;
 import java.io.*;
 
@@ -12,30 +11,37 @@ public class Client {
     private DataInputStream input = null;
     private DataInputStream inputCome = null;
     private DataOutputStream out = null;
+    static String word;
+    static GUI gui = new GUI();
 
-    public Client(String adres, int port){
-        GUI gui = new GUI();
+
+    public static void main(String args[]) {
         gui.inputDateFrame();
-        
+    }
+
+
+    public Client(String adres, int port, String slowo){
+
+
         //Slowo;Jezyk;Port
+        word = "";
         try{
             socketSend = new Socket(adres, port);
             System.out.println("polaczono");
-            if()
             input = new DataInputStream(System.in);
             out = new DataOutputStream(socketSend.getOutputStream());
-            String word = "";
-            while (!word.equals("koniec")){
-                socketCome = new ServerSocket(6665);
-                word = gui.setText() + "/" + socketCome.getLocalPort();
-                out.writeUTF(word);
-                socketWait = socketCome.accept();
-                inputCome =  new DataInputStream(new BufferedInputStream(socketWait.getInputStream()));
-                word = inputCome.readUTF();
-                GUI.resultFrame(word);
-                System.out.println(word);
-                socketCome.close();
-            }
+
+
+                    socketCome = new ServerSocket(6665);
+                    word =  slowo + "/" + socketCome.getLocalPort();
+                    System.out.println(word);
+                    out.writeUTF(word);
+                    socketWait = socketCome.accept();
+                    inputCome = new DataInputStream(new BufferedInputStream(socketWait.getInputStream()));
+                    word = inputCome.readUTF();
+                    System.out.println(word);
+
+
             inputCome.close();
             input.close();
             out.close();
@@ -44,8 +50,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        gui.resultFrame(word);
     }
-    public static void main(String args[]) {
-        Client client = new Client("localhost", 6661);
-    }
+
 }

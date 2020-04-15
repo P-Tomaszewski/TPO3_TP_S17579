@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ServerAng {
@@ -16,11 +17,20 @@ public class ServerAng {
     private DataInputStream inputServer = null;
     private DataOutputStream outputServer = null;
 
-    private Map<String, String> mapDictionary = Map.of(
-            "Koza", "Goat",
-            "Ogien", "Fire",
-            "Rower", "Bike",
-            "Noc", "Night");
+    public static void main(String[] arg){
+        int angServerPort = 6662;
+        ServerAng serverAng = new ServerAng();
+        serverAng.server(angServerPort);
+    }
+
+    public static Map<String, String> mapDictionary = new HashMap<String, String>(){
+        {
+            put("Koza", "Goat");
+            put("Ogien", "Fire");
+            put("Rower", "Bike");
+            put("Noc", "Night");
+        }
+    };
 
     public void server(int port) {
 
@@ -41,10 +51,12 @@ public class ServerAng {
                 socketSend = new Socket("localhost", Integer.parseInt(splitLine[1]));
                 inputServer = new DataInputStream(System.in);
                 outputServer = new DataOutputStream(socketSend.getOutputStream());
+                if("".equals(splitLine[0]))
+                    outputServer.writeUTF("Nie podano slowa");
                 try {
                     outputServer.writeUTF(mapDictionary.get(splitLine[0]));
                 }catch (NullPointerException a){
-                    outputServer.writeUTF("Slowa nie znaleziono w slowniku Angielskim");
+                    outputServer.writeUTF("Nie znaleziono w slowniku Angielskim");
                 }
 
             }
@@ -57,9 +69,5 @@ public class ServerAng {
         }
     }
 
-    public static void main(String[] arg){
-        int angServerPort = 6662;
-        ServerAng serverAng = new ServerAng();
-        serverAng.server(angServerPort);
-    }
+
 }

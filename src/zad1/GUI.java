@@ -15,13 +15,17 @@ public class GUI extends JPanel implements ActionListener {
     static Toolkit kit = Toolkit.getDefaultToolkit();
    static Dimension screenSize = kit.getScreenSize();
    static JButton jButton = new JButton("Ok");
+   static JButton jButtonReturn = new JButton("Return");
+    JFrame mainFrame = new JFrame();
     JTextField slowo = new JTextField();
     JComboBox comboBox = new JComboBox();
+
+    private static String res;
 
 
     public void inputDateFrame() {
 
-        JFrame mainFrame = new JFrame();
+
         mainFrame.setSize(screenSize.width / 6, screenSize.height / 6);
         mainFrame.setLocation(screenSize.width / 4, screenSize.height / 4);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,22 +44,23 @@ public class GUI extends JPanel implements ActionListener {
         mainFrame.add(jPanel);
         mainFrame.setVisible(true);
 
-
     }
 
-    public String setText() {
+    public String returnText() {
         return slowo.getText() + "/" + comboBox.getSelectedItem();
     }
 
-    public static void resultFrame(String result) {
+    public  void resultFrame(String result) {
         JFrame resultFrame = new JFrame();
         resultFrame.setSize(screenSize.width / 6, screenSize.height / 6);
         resultFrame.setLocation(screenSize.width / 4, screenSize.height / 4);
         resultFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jButtonReturn.addActionListener(this::actionPerformed);
 
-        JPanel jPanel = new JPanel(new GridLayout (1,1));
+        JPanel jPanel = new JPanel(new GridLayout (2,1));
 
         jPanel.add(new JLabel("Tłumaczenie: " + result));
+        jPanel.add(jButtonReturn);
         resultFrame.add(jPanel);
         resultFrame.setVisible(true);
     }
@@ -66,10 +71,14 @@ public class GUI extends JPanel implements ActionListener {
 
         if (akcja.getSource() == jButton) {
             try {
-              setText();
-            } finally {
+              Client client = new Client("localhost", 6661, returnText());
+              mainFrame.setVisible(false);
+            } catch (Exception e){
 
             }
+        } else if (akcja.getSource() == jButtonReturn){
+           mainFrame.setVisible(true);
+           slowo.setText("");
         }
     }
 
