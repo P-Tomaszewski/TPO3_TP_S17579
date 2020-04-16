@@ -17,22 +17,10 @@ public class IndirectServer {
     private DataInputStream inputClient = null;
     private DataOutputStream outputClient = null;
 
-    public static void main(String args[]) {
-        int indirectServerPort = 6661;
-        IndirectServer indirectServer = new IndirectServer();
-        indirectServer.server(indirectServerPort);
-    }
+   public  Map<String, Integer> mapLanguageServer = new HashMap<String, Integer>();
 
-    public static Map<String, Integer> mapLanguageServer = new HashMap<String, Integer>(){
-       {
-           put("RUS",6664);
-           put("FR", 6663);
-           put("ANG", 6662);
-        }
-    };
-
-    public void server(int port) {
-
+    public void server(int port, Map<String, Integer> mapLanguageServer) {
+        this.mapLanguageServer = mapLanguageServer;
         try {
             server = new ServerSocket(port);
             System.out.println("Start serwera");

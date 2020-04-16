@@ -6,7 +6,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
 import java.util.Map;
 
 public class LanguageServer {
@@ -17,16 +16,11 @@ public class LanguageServer {
     private DataInputStream inputServer = null;
     private DataOutputStream outputServer = null;
 
-    public static void main(String[] arg){
-
-    }
-
-
-    public void server(int port,  Map<String, String> mapDictionary) {
+    public void languageServer(int port,  Map<String, String> mapDictionary) {
 
         try {
             socketServer = new ServerSocket(port);
-            System.out.println("Start serwera");
+            System.out.println("language server Start");
             System.out.println("Oczekiwanie na klienta");
 
             String text = "";

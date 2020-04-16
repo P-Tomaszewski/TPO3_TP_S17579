@@ -7,11 +7,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class GUI extends JPanel implements ActionListener {
-    static Map<String, Integer> mapServer = IndirectServer.mapLanguageServer;
-    private static String result;
+    static Map<String, Integer> mapServer = Run.getMapLanguageServer();
     static Toolkit kit = Toolkit.getDefaultToolkit();
    static Dimension screenSize = kit.getScreenSize();
    static JButton jButton = new JButton("Ok");
@@ -25,13 +25,13 @@ public class GUI extends JPanel implements ActionListener {
 
     public void inputDateFrame() {
 
-
         mainFrame.setSize(screenSize.width / 6, screenSize.height / 6);
         mainFrame.setLocation(screenSize.width / 4, screenSize.height / 4);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel jPanel = new JPanel(new GridLayout (5,1));
         jButton.addActionListener(this::actionPerformed);
+       System.out.println(mapServer.get("RU"));
         for (String arg :
                 mapServer.keySet()) {
             comboBox.addItem(arg);
