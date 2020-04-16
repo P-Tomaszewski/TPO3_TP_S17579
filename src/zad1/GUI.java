@@ -1,13 +1,9 @@
 package zad1;
 
-import javafx.concurrent.Service;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 public class GUI extends JPanel implements ActionListener {
@@ -17,10 +13,9 @@ public class GUI extends JPanel implements ActionListener {
    static JButton jButton = new JButton("Ok");
    static JButton jButtonReturn = new JButton("Return");
     JFrame mainFrame = new JFrame();
+    JFrame resultFrame = new JFrame();
     JTextField slowo = new JTextField();
     JComboBox comboBox = new JComboBox();
-
-    private static String res;
 
 
     public void inputDateFrame() {
@@ -51,7 +46,7 @@ public class GUI extends JPanel implements ActionListener {
     }
 
     public  void resultFrame(String result) {
-        JFrame resultFrame = new JFrame();
+
         resultFrame.setSize(screenSize.width / 6, screenSize.height / 6);
         resultFrame.setLocation(screenSize.width / 4, screenSize.height / 4);
         resultFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,14 +66,14 @@ public class GUI extends JPanel implements ActionListener {
 
         if (akcja.getSource() == jButton) {
             try {
-              Client client = new Client("localhost", 6661, returnText());
+              Client.setValueFromGui(returnText());
               mainFrame.setVisible(false);
             } catch (Exception e){
 
             }
         } else if (akcja.getSource() == jButtonReturn){
            mainFrame.setVisible(true);
-           slowo.setText("");
+            slowo.setText("");
         }
     }
 

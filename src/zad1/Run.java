@@ -51,7 +51,6 @@ public class Run {
             thread.start();
         }
 
-
     }
 
     public static  Map<String, Integer> getMapLanguageServer(){
@@ -72,11 +71,10 @@ public class Run {
                 BufferedReader in = new BufferedReader(new FileReader(slownik));
                 String line = "";
                 while ((line = in.readLine()) != null) {
-                    String parts[] = line.split("\t");
+                    String parts[] = line.split("/");
                     map.put(parts[0], parts[1]);
                 }
                 in.close();
-               // System.out.println(map.toString());
                 return map;
             }
 

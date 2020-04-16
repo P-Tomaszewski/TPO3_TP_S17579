@@ -1,1 +1,5 @@
-Rower	szszi
+Rower/Vélo
+Ogien/Feu
+Dziewczyna/Fille
+Kolo/Roue
+Mysz/Souris

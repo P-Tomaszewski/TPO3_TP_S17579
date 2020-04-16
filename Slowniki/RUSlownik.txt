@@ -1,1 +1,5 @@
-Rower	iee
+Rower/велосипед
+Ogien/огонь
+Dziewczyna/девушка
+Kolo/колесо
+Mysz/мышь

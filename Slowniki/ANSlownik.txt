@@ -1,1 +1,5 @@
-Rower	Bike
+Rower/Bike
+Ogien/Fire
+Dziewczyna/Girl
+Kolo/Circle
+Mysz/Mouse
