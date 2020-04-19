@@ -67,6 +67,7 @@ public class GUI extends JPanel implements ActionListener {
         if (akcja.getSource() == jButton) {
             try {
               Client.setValueFromGui(returnText());
+              Client.setWordTrue();
               mainFrame.setVisible(false);
             } catch (Exception e){
 
