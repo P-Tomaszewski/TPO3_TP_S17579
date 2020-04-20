@@ -14,6 +14,7 @@ public class Client {
     static String word;
     static GUI gui = new GUI();
     static  String valueFromGui;
+    static boolean flaga;
 
 
 
@@ -28,13 +29,14 @@ public class Client {
         word = "";
         valueFromGui = "";
         gui.inputDateFrame();
+        flaga = false;
 
 
 
             try{
                 socketCome = new ServerSocket(port);
                 while (!valueFromGui.equals("done")) {
-                    while (valueFromGui.equals("")) {
+                    while (!flaga == true) {
                         System.out.print("");
                     }
                     connectToMainServ("localhost", 6661);
@@ -44,6 +46,7 @@ public class Client {
                     inputCome.close();
                     gui.resultFrame(word);
                     setValueFromGui("");
+                    flaga = false;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -59,6 +62,10 @@ public class Client {
 
 
 
+    }
+
+    public static boolean flagaTrue(){
+        return flaga = true;
     }
 
     public static void setValueFromGui(String slowo) {
