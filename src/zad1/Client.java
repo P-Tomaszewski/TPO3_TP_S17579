@@ -2,6 +2,7 @@ package zad1;
 
 import java.net.*;
 import java.io.*;
+import java.util.Random;
 
 public class Client {
 
@@ -19,8 +20,9 @@ public class Client {
 
 
     public static void main(String args[]) throws IOException {
-
-        Client client = new Client(7000);
+        Random rand = new Random();
+        int port = rand.nextInt(7000);
+        Client client = new Client(port);
 
     }
 
